@@ -10,14 +10,10 @@ v
 #Custom function to filter out elements of an atomic vector based on modulus
 filter_numbers <- function(v, m) {
   if (m == 0)
-    stop("Make sure to the input is a whole number greater than 0")
+    stop("Make sure the input is a whole number greater than 0")
   sol <- c()
-  for (i in seq_along(v)) {
-    if (v[i]%%m == 0) 
-      sol <- c(sol,v[i])
-  }
-
-  return (sol)
+  
+  return (v[v%%m == 0])
  }
 #Few Examples
 filter_numbers(v,2)
@@ -60,9 +56,12 @@ str(new_sw_films)
 ##Get the movies for a director (25 marks):
 #Custom function to get the title of the movies from the given data set
 get_movies <- function(data, target) {
-  movies <- data |> lapply(function(x) 
-    if (x$director == target) 
-      x$title) |> unlist()
+  movies <- data |> 
+            lapply(function(x) {
+              if (x$director == target) 
+                x$title
+            }) |> 
+            unlist()
   return (movies)
 }
 
